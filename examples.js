@@ -23,7 +23,7 @@ grid.boxes[0].setBoxBackgroundColor("pink");
 // adding an image and a text
 const content1 = document.createElement("div");
 const imgDescription = document.createElement("div");
-imgDescription.innerHTML = "Description of the image above."
+imgDescription.innerHTML = "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 const img = document.createElement("img");
 img.src = "individual_pic_1.png";
 content1.appendChild(img);

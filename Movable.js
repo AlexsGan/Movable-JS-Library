@@ -5,7 +5,7 @@ console.log('Js libraries')
 // Different way of creating library: creating an object constructor and then
 // adding to its prototype.
 
-// MovableBoxes Library
+// Movable Library
 
 function Grid(numBoxes) {
     this.boxes = [];
