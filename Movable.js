@@ -57,7 +57,7 @@ function MovableBox(i, numBoxes) {
     this.currentY;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.content = "box #" + i;
+    this.content = "box " + i;
     var _this = this;
 
     // this.dragItem.style.left = i*180+'px';
@@ -124,7 +124,7 @@ function MovableBox(i, numBoxes) {
         }
         _this.currentX = x;
         _this.currentY = y;
-        _this.dragItem.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+        _this.dragItem.style.transform = "translate3d(" + x + "px, " + y + "px, 0)"; // set box to the closest legal location
 
         _this.initialX = _this.currentX;
         _this.initialY = _this.currentY;

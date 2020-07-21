@@ -9,9 +9,12 @@ function logId(element) {
 
 // below are example usage of the library
 
-// create two grids with 4 boxes each
+// create a grids with 4 boxes each
 const grid = new Grid(4);
 const grid2 = new Grid(4);
+
+// const mb = new MovableBox(1, 4);
+
 
 // adding pure text and setting colour
 const content0 = document.createElement("div");
@@ -31,3 +34,13 @@ content1.appendChild(imgDescription);
 
 grid.boxes[1].setBoxContent(content1);
 
+// adding an image and a text
+const content2 = document.createElement("div");
+const imgDescription2 = document.createElement("div");
+imgDescription2.innerHTML = "Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+const img2 = document.createElement("img");
+img2.src = "individual_pic_2.jpg";
+content2.appendChild(img2);
+content2.appendChild(imgDescription2);
+
+grid.boxes[3].setBoxContent(content2);
