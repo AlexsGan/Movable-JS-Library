@@ -21,7 +21,7 @@ function Grid(numBoxes) {
 
     for (let i = 0; i < numBoxes; i++) {
         gridContainer.appendChild(this.boxes[i].dragItem)
-        this.boxes[i].dragItem.style.left = i * 200 + 'px';
+        this.boxes[i].dragItem.style.left = i * 300 + 'px';
         this.boxes[i].dragItem.style.top = 0 + 'px';
         // this.positions[i][0] = this.boxes[i].dragItem.style.left
         // this.positions[i][1] = this.boxes[i].dragItem.style.up
@@ -45,7 +45,7 @@ function MovableBox(i, numBoxes) {
     // this.. (any values you need for each 'instance' of this library)
 
     const box = document.createElement("div");
-    box.id = "item";
+    box.id = "box";
 
     this.dragItem = box;
     // this.empties = document.querySelectorAll('#item');
@@ -98,26 +98,26 @@ function MovableBox(i, numBoxes) {
         let x = 0;
         let y = 0;
         for (let i = 0; i < numBoxes; i++) {
-            if (_this.offsetX > 200 * i - 100 && _this.offsetX < 200 * i + 100) { // if moved to right
-                x = 200 * i;
+            if (_this.offsetX > 300 * i - 150 && _this.offsetX < 300 * i + 150) { // if moved to right
+                x = 300 * i;
                 // console.log(_this.offsetX+" x")
                 break;
             }
-            else if (_this.offsetX < - 200 * i + 100 && _this.offsetX > - 200 * i - 100) { // if moved to left
-                x = - 200 * i;
+            else if (_this.offsetX < - 300 * i + 150 && _this.offsetX > - 300 * i - 150) { // if moved to left
+                x = - 300 * i;
                 // console.log(_this.offsetX+" x")
                 break;
             }
         }
         for (let i = 0; i < numBoxes; i++) {
             let s = 0;
-            if (_this.offsetY > 340 * i - 170 && _this.offsetY < 340 * i + 170) { // if moved down
-                y = 340 * i;
+            if (_this.offsetY > 440 * i - 220 && _this.offsetY < 440 * i + 220) { // if moved down
+                y = 440 * i;
                 // console.log(_this.offsetY+" y")
                 break;
             }
-            else if (_this.offsetY < - 340 * i + 170 && _this.offsetY > - 340 * i - 170) { // if moved up
-                y = - 340 * i;
+            else if (_this.offsetY < - 440 * i + 220 && _this.offsetY > - 440 * i - 220) { // if moved up
+                y = - 440 * i;
                 // console.log(_this.offsetY+" y")
                 break;
             }
@@ -159,10 +159,17 @@ function MovableBox(i, numBoxes) {
 MovableBox.prototype = {
 
     setBoxContent: function (content) {
-        this.dragItem.innerHTML = content;
+        // this.dragItem.innerHTML = content;
+        this.dragItem.appendChild(content);
+        // const body = document.querySelector('body')
+        // body.append(content);
     },
 
-    setEmpties: function (boxes) {
-        this.empties = boxes;
-    }
+    setBoxBackgroundColor: function (color) {
+        this.dragItem.style.backgroundColor = color;
+    },
+
+    // setEmpties: function (boxes) {
+    //     this.empties = boxes;
+    // }
 }
