@@ -14,14 +14,13 @@ console.log('Js libraries')
 function Grid(numBoxes) {
     this.boxes = [];
     // this.positions = [[]];
-
-    for (let i = 0; i < numBoxes; i++) {
-        const mb = new MovableBox(i, numBoxes);
-        this.boxes.push(mb);
-    }
-
     const gridContainer = document.createElement("div");
     gridContainer.id = "grid";
+
+    for (let i = 0; i < numBoxes; i++) {
+        const mb = new MovableBox(i, numBoxes, gridContainer);
+        this.boxes.push(mb);
+    }
 
     for (let i = 0; i < numBoxes; i++) {
         gridContainer.appendChild(this.boxes[i].dragItem)
@@ -44,7 +43,7 @@ Grid.prototype = {
 
 }
 
-function MovableBox(i, numBoxes) {
+function MovableBox(i, numBoxes, gridContainer) {
     // this..
     // this.. (any values you need for each 'instance' of this library)
 
@@ -69,13 +68,15 @@ function MovableBox(i, numBoxes) {
 
     this.dragItem.innerHTML = this.content;
 
-    this.dragItem.addEventListener("touchstart", dragStart, false);
-    this.dragItem.addEventListener("touchend", dragEnd, false);
-    this.dragItem.addEventListener("touchmove", drag, false);
+    // changed from this.dragItem to gridContainer to fix the bug where 
+    // if the mouse moves outside of MovableBox it causes a glitch
+    gridContainer.addEventListener("touchstart", dragStart, false);
+    gridContainer.addEventListener("touchend", dragEnd, false);
+    gridContainer.addEventListener("touchmove", drag, false);
 
-    this.dragItem.addEventListener("mousedown", dragStart, false);
-    this.dragItem.addEventListener("mouseup", dragEnd, false);
-    this.dragItem.addEventListener("mousemove", drag, false);
+    gridContainer.addEventListener("mousedown", dragStart, false);
+    gridContainer.addEventListener("mouseup", dragEnd, false);
+    gridContainer.addEventListener("mousemove", drag, false);
 
     var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
     this.dragItem.style.backgroundColor = randomColor;
