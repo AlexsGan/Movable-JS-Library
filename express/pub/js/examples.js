@@ -13,9 +13,11 @@ function logId(element) {
 
 // below are example usage of the library
 
-// create a grids with 4 boxes each
-const grid = new Grid(4);
-const grid2 = new Grid(4);
+// create a default grid with 6 default boxes
+const grid = new Grid(6);
+
+// create a grid with specified gridwidth along with 4 boxes also with specified size
+const grid2 = new Grid(4, null, 1060, 300, 300, 10, 20);
 
 // const mb = new MovableBox(1, 4);
 

@@ -11,21 +11,30 @@ console.log('Js libraries')
 
 // Movable Library
 
-function Grid(numBoxes) {
+// default values: gridHeight = 895, gridWidth = 1510, width = 260, height = 400, margins = 15, border = 15
+function Grid(numBoxes, gridHeight = 895, gridWidth = 1510, width = 260, height = 400, margins = 10, border = 15) {
     this.boxes = [];
     // this.positions = [[]];
     const gridContainer = document.createElement("div");
     gridContainer.id = "grid";
+    gridContainer.style.width = gridWidth+"px";     // the width of the grid can be specified,
+    gridContainer.style.height = gridHeight+"px";   // along with the height
 
-    for (let i = 0; i < numBoxes; i++) {
-        const mb = new MovableBox(i, numBoxes, gridContainer);
+    for (let i = 0; i < numBoxes; i++) { // create a MovableBox using the specified styles
+        const mb = new MovableBox(i, numBoxes, gridContainer, width, height, margins, border);
         this.boxes.push(mb);
     }
 
+    const tmp_width = width + margins + border*2;
+    const num_box_in_row = Math.floor(gridWidth/tmp_width); // calculate and store the number of boxes that can fit in a row
+
     for (let i = 0; i < numBoxes; i++) {
         gridContainer.appendChild(this.boxes[i].dragItem)
-        this.boxes[i].dragItem.style.left = i * 300 + 'px';
-        this.boxes[i].dragItem.style.top = 0 + 'px';
+
+        // wrap boxes based on specified styles so boxes do not expand horizontally where screen cannot see
+        this.boxes[i].dragItem.style.top = (height + margins + border*2) * Math.floor(i/num_box_in_row) + 'px';
+        this.boxes[i].dragItem.style.left = (width + margins + border*2) * (i - num_box_in_row * Math.floor(i/num_box_in_row)) + 'px';
+
         // this.positions[i][0] = this.boxes[i].dragItem.style.left
         // this.positions[i][1] = this.boxes[i].dragItem.style.up
     }
@@ -36,14 +45,13 @@ function Grid(numBoxes) {
     // for (let i = 0; i < numBoxes; i++) {
     //     this.boxes[i].setEmpties(this.boxes);
     // }
-
 }
 
 Grid.prototype = {
 
 }
 
-function MovableBox(i, numBoxes, gridContainer) {
+function MovableBox(i, numBoxes, gridContainer, width, height, margins, border) {
     // this..
     // this.. (any values you need for each 'instance' of this library)
 
@@ -67,6 +75,17 @@ function MovableBox(i, numBoxes, gridContainer) {
     // this.dragItem.style.top = 0+'px';
 
     this.dragItem.innerHTML = this.content;
+    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    this.dragItem.style.backgroundColor = randomColor;
+
+    // update the specified sizing of the box
+    this.dragItem.style.border = border+"px solid rgba(130, 130, 130, .5)";
+    this.dragItem.style.height = height+"px";
+    this.dragItem.style.width = width+"px";
+    
+    // default box size with adjustment for where the box will automatically move to after being dragged
+    width = width + margins + border*2;
+    height = height + margins + border*2;
 
     // changed from this.dragItem to gridContainer to fix the bug where 
     // if the mouse moves outside of MovableBox it causes a glitch
@@ -78,14 +97,11 @@ function MovableBox(i, numBoxes, gridContainer) {
     gridContainer.addEventListener("mouseup", dragEnd, false);
     gridContainer.addEventListener("mousemove", drag, false);
 
-    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    this.dragItem.style.backgroundColor = randomColor;
-
     const body = document.querySelector('body')
     body.append(this.dragItem)
     // this.boxes.push(box)
 
-    function dragStart(e) {
+    function dragStart(e) { // when mouse is clicked on a box
         if (e.type === "mousedown") {
             _this.initialX = e.clientX - _this.offsetX;
             _this.initialY = e.clientY - _this.offsetY;
@@ -99,30 +115,31 @@ function MovableBox(i, numBoxes, gridContainer) {
         }
     }
 
-    function dragEnd(e) {
+    function dragEnd(e) { 
+        // the destination of a box being dragged to is adjusted based on the chosen box sizes and margins
         let x = 0;
         let y = 0;
         for (let i = 0; i < numBoxes; i++) {
-            if (_this.offsetX > 300 * i - 150 && _this.offsetX < 300 * i + 150) { // if moved to right
-                x = 300 * i;
+            if (_this.offsetX > width * i - width/2 && _this.offsetX < width * i + width/2) { // if moved to right
+                x = width * i;
                 // console.log(_this.offsetX+" x")
                 break;
             }
-            else if (_this.offsetX < - 300 * i + 150 && _this.offsetX > - 300 * i - 150) { // if moved to left
-                x = - 300 * i;
+            else if (_this.offsetX < - width * i + width/2 && _this.offsetX > - width * i - width/2) { // if moved to left
+                x = - width * i;
                 // console.log(_this.offsetX+" x")
                 break;
             }
         }
         for (let i = 0; i < numBoxes; i++) {
             let s = 0;
-            if (_this.offsetY > 440 * i - 220 && _this.offsetY < 440 * i + 220) { // if moved down
-                y = 440 * i;
+            if (_this.offsetY > height * i - height/2 && _this.offsetY < height * i + height/2) { // if moved down
+                y = height * i;
                 // console.log(_this.offsetY+" y")
                 break;
             }
-            else if (_this.offsetY < - 440 * i + 220 && _this.offsetY > - 440 * i - 220) { // if moved up
-                y = - 440 * i;
+            else if (_this.offsetY < - height * i + height/2 && _this.offsetY > - height * i - height/2) { // if moved up
+                y = - height * i;
                 // console.log(_this.offsetY+" y")
                 break;
             }
@@ -140,7 +157,7 @@ function MovableBox(i, numBoxes, gridContainer) {
         _this.active = false;
     }
 
-    function drag(e) {
+    function drag(e) { // changing the view of the box that is being dragged
         if (_this.active) {
             e.preventDefault();
             if (e.type === "mousemove") {
