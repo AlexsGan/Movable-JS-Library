@@ -14,7 +14,7 @@ in this order followed by the js file that uses this library. In this webpage fo
 
 * A direct link to the documentation:
 https://gentle-retreat-99993.herokuapp.com/examples.html
-(this is the same link as the landing page as the documentation is at the bottom of the it)
+(this is the same link as the landing page as the documentation is at the bottom of it)
 
 Below is a copy of the 'api' section from the documentation:
 
