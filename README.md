@@ -1,7 +1,7 @@
 # js-library-ganrui
 
 * A link to the landing page:
-
+https://gentle-retreat-99993.herokuapp.com/examples.html
 
 * A copy of the 'Getting Started' section from the documentation:
 
@@ -13,6 +13,7 @@ in this order followed by the js file that uses this library. In this webpage fo
 
 
 * A direct link to the documentation:
+https://gentle-retreat-99993.herokuapp.com/examples.html
 (this is the same link as the landing page as the documentation is at the bottom of the it)
 
 Below is a copy of the 'api' section from the documentation:

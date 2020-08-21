@@ -191,6 +191,7 @@ function documentation(){ // display the documentation in the landing page
 	body.append(description1);
 
 	// A list of API for the library
+	// title
 	const title2 = document.createElement("div");
 	title2.innerHTML = "API";
 	title2.style.textAlign = "center";
@@ -200,18 +201,44 @@ function documentation(){ // display the documentation in the landing page
 	title2.style.marginTop = "70px";
 	body.append(title2);	
 
+	// Object creations
 	const description2 = document.createElement("div");
-	description2.innerHTML = '<b>Creating Objects:</b> <br><br>'+
-								'<img src="object_descriptions_pic.png" alt="create object examples"> <br><br>'+
-								'<br><br>'+
-								'<b>Using Object Functions:</b> <br><br>'+
-								'<img src="grid_functions_pic.png" alt="grid object method examples"> <br><br>'+
-								''+
-								'<img src="movablebox_functions_pic.png" alt="movablebox object method examples"> <br><br>';
+	description2.innerHTML = '<b>To create new Objects:</b><br><br>';
 	description2.style.fontSize = "16px";
 	description2.style.fontFamily = "Verdana";
-	description2.style.marginBottom = "200px";
+	description2.style.marginBottom = "50px";
+
+	const img1 = document.createElement("img");
+	img1.src = "object_descriptions_pic.png";	
+	description2.appendChild(img1);
+
 	body.append(description2);
+
+	// Using Grid functions
+	const description3 = document.createElement("div");
+	description3.innerHTML = '<b>To use Grid functions:</b><br><br>';
+	description3.style.fontSize = "16px";
+	description3.style.fontFamily = "Verdana";
+	description3.style.marginBottom = "50px";
+
+	const img2 = document.createElement("img");
+	img2.src = "grid_functions_pic.png";	
+	description3.appendChild(img2);
+
+	body.appendChild(description3);
+
+	// Using Movablebox functions
+	const description4 = document.createElement("div");
+	description4.innerHTML = '<b>To use Movablebox functions:</b><br><br>';
+	description4.style.fontSize = "16px";
+	description4.style.fontFamily = "Verdana";
+	description4.style.marginBottom = "200px";
+
+	const img3 = document.createElement("img");
+	img3.src = "movablebox_functions_pic.png";	
+	description4.appendChild(img3);
+
+	body.appendChild(description4);
 }
 
 documentation();
