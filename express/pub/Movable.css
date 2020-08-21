@@ -1,7 +1,7 @@
 #grid {
     width: 1510px;
     height: 1000px;
-    background-color: rgb(51, 51, 51);
+    background-color:DarkSlateGray;
     /* display: flex; */
     align-items: center;
     justify-content: center;
@@ -36,9 +36,8 @@
     background-color: rgb(255, 255, 0);
     border: 15px solid rgba(130, 130, 130, .5);
 
-    overflow: auto;
-    /* touch-action: none;
-    user-select: none; */
+    /* overflow: auto; */
+    overflow: hidden; 
   }
   img { 
     width:100%; 
