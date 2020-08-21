@@ -18,6 +18,7 @@ in this order followed by the js file that uses this library. In this webpage fo
 Below is a copy of the 'api' section from the documentation:
 
 To create new Objects:
+    // initializing arguments
 	let numBoxes, middleSpace, gridHeight, gridWidth, width, height, margins, border;
 	
 	// create a default grid with default number of boxes
@@ -37,6 +38,7 @@ To create new Objects:
 	//		border: 		border width (top = left = right = bottom) of each MovableBox
 
 To use Grid functions:
+    // creating contents to be added
 	const gridContent = document.createElement("div");
 	const gridBackgroundImg = document.createElement("img");
 	gridBackgroundImg.src = "image_part_001.png";	
@@ -51,6 +53,7 @@ To use Grid functions:
 	grid.setGridContent(gridContent)
 
 To use MovableBox functions:
+    // creating contents to be added
 	const content0 = document.createElement("div");
 	content0.innerHTML = "--content of the box here--";
 
