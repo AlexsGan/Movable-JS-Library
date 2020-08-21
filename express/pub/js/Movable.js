@@ -12,10 +12,11 @@ console.log('Js libraries')
 // Movable Library
 
 // default values: gridHeight = 895, gridWidth = 1510, width = 260, height = 400, margins = 15, border = 15
-function Grid(numBoxes, gridHeight = 895, gridWidth = 1510, width = 260, height = 400, margins = 10, border = 15) {
+function Grid(numBoxes, middleSpace = 0, gridHeight = 895, gridWidth = 1510, width = 260, height = 400, margins = 10, border = 15) {
     this.boxes = [];
     // this.positions = [[]];
     const gridContainer = document.createElement("div");
+    this.gridContainer = gridContainer;
     gridContainer.id = "grid";
     gridContainer.style.width = gridWidth+"px";     // the width of the grid can be specified,
     gridContainer.style.height = gridHeight+"px";   // along with the height
@@ -26,15 +27,22 @@ function Grid(numBoxes, gridHeight = 895, gridWidth = 1510, width = 260, height 
     }
 
     const tmp_width = width + margins + border*2;
+    const tmp_height = height + margins + border*2;
     const num_box_in_row = Math.floor(gridWidth/tmp_width); // calculate and store the number of boxes that can fit in a row
-
+    let horizontalSpace = 0;
+    
     for (let i = 0; i < numBoxes; i++) {
         gridContainer.appendChild(this.boxes[i].dragItem)
 
         // wrap boxes based on specified styles so boxes do not expand horizontally where screen cannot see
-        this.boxes[i].dragItem.style.top = (height + margins + border*2) * Math.floor(i/num_box_in_row) + 'px';
         this.boxes[i].dragItem.style.left = (width + margins + border*2) * (i - num_box_in_row * Math.floor(i/num_box_in_row)) + 'px';
 
+        if (middleSpace > 0) { // add the space in the middle
+            if (i >= numBoxes/2) {
+                horizontalSpace = middleSpace * tmp_height;
+            }
+        }
+        this.boxes[i].dragItem.style.top = horizontalSpace + (height + margins + border*2) * Math.floor(i/num_box_in_row) + 'px';
         // this.positions[i][0] = this.boxes[i].dragItem.style.left
         // this.positions[i][1] = this.boxes[i].dragItem.style.up
     }
@@ -48,7 +56,14 @@ function Grid(numBoxes, gridHeight = 895, gridWidth = 1510, width = 260, height 
 }
 
 Grid.prototype = {
+    
+    setGridContent: function (content) {
+        this.gridContainer.appendChild(content);
+    },
 
+    setGridBackgroundColor: function (backgroundColor) {
+        this.gridContainer.style.backgroundColor = backgroundColor;
+    },
 }
 
 function MovableBox(i, numBoxes, gridContainer, width, height, margins, border) {
@@ -68,13 +83,14 @@ function MovableBox(i, numBoxes, gridContainer, width, height, margins, border) 
     this.currentY;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.content = "box " + i;
+    // this.content = "box " + i;
+    // this.dragItem.innerHTML = this.content;
+
     var _this = this;
 
     // this.dragItem.style.left = i*180+'px';
     // this.dragItem.style.top = 0+'px';
 
-    this.dragItem.innerHTML = this.content;
     var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
     this.dragItem.style.backgroundColor = randomColor;
 
@@ -181,15 +197,16 @@ function MovableBox(i, numBoxes, gridContainer, width, height, margins, border) 
 MovableBox.prototype = {
 
     setBoxContent: function (content) {
-        // this.dragItem.innerHTML = content;
         this.dragItem.appendChild(content);
-        // const body = document.querySelector('body')
-        // body.append(content);
     },
 
-    setBoxBackgroundColor: function (color) {
-        this.dragItem.style.backgroundColor = color;
+    setBoxBackgroundColor: function (backgroundColor) {
+        this.dragItem.style.backgroundColor = backgroundColor;
     },
+
+    setBoxTextColor: function (color) {
+        this.dragItem.style.color = color;
+    }
 
     // setEmpties: function (boxes) {
     //     this.empties = boxes;
