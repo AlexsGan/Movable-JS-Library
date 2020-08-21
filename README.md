@@ -6,10 +6,10 @@
 * A copy of the 'Getting Started' section from the documentation:
 
 The scripts to include in your html header: 
-	* <link rel="stylesheet" type="text/css" href="Movable.css"> 
-	* <script defer type="text/javascript" src="js/Movable.js"> 
+	<link rel="stylesheet" type="text/css" href="Movable.css"> 
+	<script defer type="text/javascript" src="js/Movable.js"> 
 in this order followed by the js file that uses this library. In this webpage for example, include
-	* <script defer type="text/javascript" src="js/examples.js">
+	<script defer type="text/javascript" src="js/examples.js">
 
 
 * A direct link to the documentation:
