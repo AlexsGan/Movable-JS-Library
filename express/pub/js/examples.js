@@ -209,7 +209,7 @@ function documentation(){ // display the documentation in the landing page
 	description2.style.marginBottom = "50px";
 
 	const img1 = document.createElement("img");
-	img1.src = "object_descriptions_pic.png";	
+	img1.src = "object_descriptions_pic.PNG";	
 	description2.appendChild(img1);
 
 	body.append(description2);
@@ -222,7 +222,7 @@ function documentation(){ // display the documentation in the landing page
 	description3.style.marginBottom = "50px";
 
 	const img2 = document.createElement("img");
-	img2.src = "grid_functions_pic.png";	
+	img2.src = "grid_functions_pic.PNG";	
 	description3.appendChild(img2);
 
 	body.appendChild(description3);
@@ -235,7 +235,7 @@ function documentation(){ // display the documentation in the landing page
 	description4.style.marginBottom = "200px";
 
 	const img3 = document.createElement("img");
-	img3.src = "movablebox_functions_pic.png";	
+	img3.src = "movablebox_functions_pic.PNG";	
 	description4.appendChild(img3);
 
 	body.appendChild(description4);
