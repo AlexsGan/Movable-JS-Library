@@ -1,4 +1,4 @@
-# js-library-ganrui
+# Movable-JS-Library
 
 * A link to the landing page:
 https://gentle-retreat-99993.herokuapp.com/examples.html
